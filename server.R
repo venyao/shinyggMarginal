@@ -54,34 +54,36 @@ shinyServer(
           }
           
           ggmar <- function(){
-            p <- ggplot(data, aes(x = data[,1], y=data[,2])) + geom_point(size = input$var2, colour =input$var5, shape=input$var6) + 
-              theme(legend.position = "none", axis.text=element_text(size = input$var3)) +
-              labs(x = input$ggMar_xTitle, y = input$ggMar_yTitle, title = input$ggMar_Title) +
-              theme(axis.title = element_text(size = input$var4))
+            p <- ggplot(data, aes(x = data[,1], y=data[,2])) + 
+              geom_point(size = input$var2, colour =input$var5, shape=input$var6) + 
+              theme(legend.position = "none", axis.text=element_text(size = input$var4)) +
+              labs(x = input$ggMar_xTitle, y = input$ggMar_yTitle, title = input$ggMar_plotTitle) +
+              theme(plot.title = element_text(hjust = 0.5))+
+              theme(plot.title = element_text(size = input$var3),axis.title = element_text(size = input$var9))
             
             if (input$plot_type == "histogram" ) {
-              p1 <- ggMarginal(p, type = "histogram", fill = input$var1, binwidth = input$var7, margins = input$which_margin)
+              p1 <- ggMarginal(p, type = "histogram", fill = input$var1, binwidth = input$var7, margins = input$which_margin,size = input$var8)
             }
             
             if (input$plot_type == "density") {
-              p1 <- ggMarginal(p, type = "density", color = input$var1, size=4, fill = input$var1, margins = input$which_margin)
+              p1 <- ggMarginal(p, type = "density", color = input$var1,  fill = input$var1, margins = input$which_margin,size = input$var8)
             }
             
             if (input$plot_type == "boxplot" ) {
               if (input$outlier == 1) {
-                p1 <- ggMarginal(p, type = "boxplot", color = input$var1, margins = input$which_margin)
+                p1 <- ggMarginal(p, type = "boxplot", color = input$var1, margins = input$which_margin,size = input$var8)
               }
               if (input$outlier == 2) {
-                p1 <- ggMarginal(p, type = "boxplot", color = input$var1, outlier.colour = NA, margins = input$which_margin)
+                p1 <- ggMarginal(p, type = "boxplot", color = input$var1, outlier.colour = NA, margins = input$which_margin,size = input$var8)
               }
             }
             
             if (input$plot_type == "violin" ) {
-              p1 <- ggMarginal(p, type = "violin", color = input$var1, margins = input$which_margin)
+              p1 <- ggMarginal(p, type = "violin", color = input$var1, margins = input$which_margin,size = input$var8)
             }
             
             if (input$plot_type == "densigram") {
-              p1 <- ggMarginal(p, type = "densigram", color = input$var1, margins = input$which_margin)
+              p1 <- ggMarginal(p, type = "densigram", color = input$var1, margins = input$which_margin,size = input$var8)
             }
             
             return(p1)

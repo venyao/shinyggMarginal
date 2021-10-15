@@ -63,6 +63,10 @@ shinyUI(
                           checkboxInput("ggMartitle", "Plot title", FALSE), 
                           conditionalPanel(
                             condition = "input.ggMartitle",
+                            textInput("ggMar_plotTitle", h4("Plot title:",
+                                                            bsButton("bs0", label = "", icon = icon("question"), style = "info", size = "small")
+                            ), value = c("plot title")),
+                            bsPopover("bs0", "修改图片标题。", trigger = "focus"),
                             
                             textInput("ggMar_xTitle", h4("X axis title:",
                                                          bsButton("bs1", label = "", icon = icon("question"), style = "info", size = "small")
@@ -84,12 +88,18 @@ shinyUI(
                             sliderInput("var6", h4("Point shape:"),
                                         min = 0, max = 20,
                                         value = 20, step = 1),
-                            sliderInput("var3", h4("Axis label font size:"),
-                                        min = 10, max = 30,
-                                        value = 15, step = 0.01),
-                            sliderInput("var4", h4("Axis title font size:"),
+                            sliderInput("var3", h4("Plot title font size"),
                                         min = 10, max = 50,
                                         value = 25, step = 0.01),
+                            sliderInput("var4", h4("Axis label font size"),
+                                        min = 10, max = 30,
+                                        value = 15, step = 0.01),
+                            sliderInput("var9", h4("Axis title font size"),
+                                        min = 10, max = 50,
+                                        value = 25, step = 0.01),
+                            sliderInput("var8", h4("Size ratio of main plot:marginal plots"),
+                                        min = 1, max = 5,
+                                        value = 2.5, step = 0.01),
                           ),
                           actionButton("submit1", strong("Submit!"), styleclass = "success", width='100%') 
              ),
