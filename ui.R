@@ -23,6 +23,7 @@ shinyUI(
                                            fileInput("Upload_data", label="", multiple = FALSE),
                                            downloadButton("Example_data.txt", "Download example data"),
                           ),
+                          
                           conditionalPanel(condition="input.seluploaddata == '2'",
                                            textAreaInput("Paste_data", label="", width="100%", resize="vertical", 
                                                          height="200px", placeholder = "Paste text to upload data"),
@@ -36,7 +37,7 @@ shinyUI(
                                                                                 "densigram" = "densigram"), 
                                       "histogram"),
                           conditionalPanel(condition="input.plot_type == 'histogram'",
-                                           sliderInput("var7", h4("bin width of histogram:"),
+                                           sliderInput("var7", h4("Bin width of histogram:"),
                                                        min = 0.001, max = 1.0,
                                                        value = 0.1, step = 0.01),
                           ),
@@ -46,6 +47,7 @@ shinyUI(
                                                         choices = list("Retain outliers" = 1, "Hide outliers" = 2),
                                                         selected = 1),
                           ),
+                          
                           checkboxInput("ggMarcolor", "Plot color", FALSE),
                           conditionalPanel(
                             condition = "input.ggMarcolor",
@@ -60,6 +62,7 @@ shinyUI(
                             bsPopover("bs4", '对数据进行绘图时，填充散点图的颜色，且用户可根据自己喜好更改颜色。', trigger = "focus"),
                             fluidRow(column(12, jscolorInput("var5", label = NULL, value = "#000000"))),
                           ),
+                          
                           checkboxInput("ggMartitle", "Plot title", FALSE), 
                           conditionalPanel(
                             condition = "input.ggMartitle",
@@ -76,7 +79,8 @@ shinyUI(
                             textInput("ggMar_yTitle", h4("Y axis title:",
                                                          bsButton("bs2", label = "", icon = icon("question"), style = "info", size = "small")
                             ), value = c("Y axis")),
-                            bsPopover("bs2", "修改y轴标题。", trigger = "focus")),
+                            bsPopover("bs2", "修改y轴标题。", trigger = "focus")
+                          ),
                           
                           checkboxInput("ggMarSize", "Other plot parameters", FALSE),
                           
@@ -113,8 +117,7 @@ shinyUI(
     ),
     
     tabPanel("Help",
-      includeMarkdown("README.md")
-    )
+             includeMarkdown("README.md"))
   )
 )
 
